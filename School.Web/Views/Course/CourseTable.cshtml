@@ -1,0 +1,186 @@
+﻿@model PagedList.IPagedList<School.Entities.Course>
+@using PagedList;
+@using PagedList.Mvc;
+
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "CourseTable";
+}
+
+<!-- #region AllCourses -->
+<h2>All Courses</h2>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, x => Url.Action("CourseTable", "Course", new { page = x, sortOrder = ViewBag.TitleShort, searchTitle = ViewBag.CurrentTitle }))
+
+@using (Html.BeginForm("CourseTable", "Course", FormMethod.Get))
+{
+    @Html.TextBox("searchTitle", null, new { placeholder = "Serch By Title" })
+    <input type="submit" value="search" />
+}
+
+<div>
+    Sort By:
+    @Html.ActionLink("Title", "CourseTable", "Course", new { sortOrder = ViewBag.TitleShort, searchTitle = ViewBag.CurrentTitle }, new { @class = "badge badge-primary" })
+    <br />
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>@Html.ActionLink("Title", "CourseTable", "Course", new { sortOrder = ViewBag.TitleShort, searchTitle = ViewBag.CurrentTitle }, null)</th>
+            <th>Stream</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td><img width="110" class="img-fluid" src="@Html.DisplayFor(x=>course.PhotoUrl)" alt="Course Photo Missing" /></td>
+                <td>@Html.ActionLink(course.Title, "CourseDetails", "Course", new { id = course.CourseId }, null)</td>
+                <td>@Html.DisplayFor(x => course.Stream)</td>
+                <td>@Html.DisplayFor(x => course.StartDate)</td>
+                <td>@Html.DisplayFor(x => course.EndDate)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<br />
+<!-- #endregion -->
+<!-- #region StudentsPerCourse -->
+<h2>Students Per Course</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Students</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td><img width="110" class="img-fluid" src="@Html.DisplayFor(x=>course.PhotoUrl)" alt="Course Photo Missing" /></td>
+                <td>@Html.ActionLink(course.Title, "CourseDetails", "Course", new { id = course.CourseId }, null)</td>
+                <td>
+                    <ol>
+                        @foreach (var student in course.Students)
+                        {
+                            <li>@Html.DisplayFor(x => student.FirstName)</li>
+                            <li>@Html.DisplayFor(x => student.LastName)</li>
+                        }
+                    </ol>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<br />
+<!-- #endregion -->
+<!-- #region TrainersPerCourse -->
+<h2>Trainers Per Course</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Trainers</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td><img width="110" class="img-fluid" src="@Html.DisplayFor(x=>course.PhotoUrl)" alt="Course Photo Missing" /></td>
+                <td>@Html.ActionLink(course.Title, "CourseDetails", "Course", new { id = course.CourseId }, null)</td>
+                <td>
+                    <ol>
+                        @foreach (var trainer in course.Trainers)
+                        {
+                            <li>@Html.DisplayFor(x => trainer.FirstName)</li>
+                            <li>@Html.DisplayFor(x => trainer.LastName)</li>
+                        }
+                    </ol>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<br />
+<!-- #endregion -->
+<!-- #region AssignmentsPerCourse -->
+<h2>Assignments Per Course</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Assignments</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td><img width="110" class="img-fluid" src="@Html.DisplayFor(x=>course.PhotoUrl)" alt="Course Photo Missing" /></td>
+                <td>@Html.ActionLink(course.Title, "CourseDetails", "Course", new { id = course.CourseId }, null)</td>
+                <td>
+                    <ol>
+                        @foreach (var assignments in course.Assignments)
+                        {
+                            <li>@Html.DisplayFor(x => assignments.Title)</li>
+                            <li>@Html.DisplayFor(x => assignments.Description)</li>
+                        }
+                    </ol>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<br />
+<!-- #endregion -->
+<!-- #region AssignmentsPerStudentPerCourse -->
+<h2>Assignments Per Student Per Course</h2>
+
+<table class="table">
+    <ul>
+        @foreach (var course in Model)
+        {
+            <li>@course.Title</li>
+            <li>@course.Stream</li>
+            <ul>
+                @foreach (var assignment in course.Assignments)
+                {
+                    <li>@assignment.Title</li>
+                    <li>@assignment.Description</li>
+                    <ul>
+                        @foreach (var student in assignment.Students)
+                        {
+                            <li>@student.FirstName @student.LastName</li>
+                        }
+                    </ul>
+                }
+            </ul>
+        }
+    </ul>
+</table>
+<br />
+<br />
+<!-- #endregion -->

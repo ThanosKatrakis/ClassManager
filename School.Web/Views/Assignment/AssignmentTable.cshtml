@@ -1,0 +1,50 @@
+﻿@model PagedList.IPagedList<School.Entities.Assignment>
+@using PagedList;
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "AssignmentTable";
+}
+
+<h2>All Assignments</h2>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, x => Url.Action("AssignmentTable", "Assignment", new { page = x, sortOrder = ViewBag.TitleShort, searchTitle = ViewBag.CurrentTitle }))
+
+@using (Html.BeginForm("AssignmentTable", "Assignment", FormMethod.Get))
+{
+    @Html.TextBox("searchTitle", null, new { placeholder = "Serch By Title" })
+    <input type="submit" value="search" />
+}
+
+<div>
+    Sort By:
+    @Html.ActionLink("Title", "AssignmentTable", "Assignment", new { sortOrder = ViewBag.TitleShort, searchTitle = ViewBag.CurrentTitle }, new { @class = "badge badge-primary" })
+    <br />
+</div>
+<hr />
+<table class="container">
+    <thead>
+        <tr>
+            <th>@Html.ActionLink("Title", "AssignmentTable", "Assignment", new { sortOrder = ViewBag.TitleShort, searchTitle = ViewBag.CurrentTitle }, null)</th>
+            <th>Description</th>
+            <th>Submission Date</th>
+            <th>Oral Mark</th>
+            <th>Total Mark</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var assignment in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(assignment.Title, "AssignmentDetails", "Assignment", new { id = assignment.AssignmentId }, null)</td>
+                <td>@Html.DisplayFor(x => assignment.Description)</td>
+                <td>@Html.DisplayFor(x => assignment.SubmissionDate)</td>
+                <td>@Html.DisplayFor(x => assignment.OralMark)</td>
+                <td>@Html.DisplayFor(x => assignment.TotalMark)</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,18 @@
+﻿@model School.Entities.Course
+
+@{
+    ViewBag.Title = "CourseDetails";
+}
+
+<h2>Course Details</h2>
+
+<h3>@Model.Title</h3>
+<img width="300" class="img-fluid" src="@Html.DisplayFor(x => Model.PhotoUrl)" alt="Photo Missing" />
+
+<ul>
+    <li>@Html.DisplayNameFor(x => Model.Stream) : @Html.DisplayFor(x => Model.Stream)</li>
+    <li>@Html.DisplayNameFor(x => Model.StartDate) : @Html.DisplayFor(x => Model.StartDate)</li>
+    <li>@Html.DisplayNameFor(x => Model.EndDate) : @Html.DisplayFor(x => Model.EndDate)</li>
+</ul>
+
+@Html.ActionLink("Back to course list", "CourseTable", "Course")

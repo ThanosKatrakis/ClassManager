@@ -1,0 +1,37 @@
+﻿@model School.Web.Models.StatsViewModel
+
+<h1>View Bootcamp Stats</h1>
+<hr />
+
+<b>Courses Count : </b> @Model.CoursesCount
+<hr />
+<b>Assignments Count : </b> @Model.AssignmentsCount
+<hr />
+<b>Trainers Count : </b> @Model.TrainersCount
+<hr />
+<b>Students Count : </b> @Model.StudentsCount
+<hr />
+<b>Trainers Per Course</b>
+@foreach (var trainer in Model.CourseTable)
+{
+    <br />
+    <b>@trainer.Title : </b>
+    <b>got @trainer.Trainers.Count() trainers</b> 
+}
+<hr />
+<b>Students Per Course</b>
+@foreach (var student in Model.CourseTable)
+{
+    <br />
+    <b>@student.Title : </b>
+    <b>got @student.Students.Count() students</b> 
+}
+<hr />
+<b>Assignment Per Course</b>
+@foreach (var assignment in Model.CourseTable)
+{
+    <br />
+    <b>@assignment.Title : </b>
+    <b>got @assignment.Assignments.Count() assignments</b> 
+}
+

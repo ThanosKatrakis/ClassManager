@@ -1,0 +1,11 @@
+C:\Users\k.b.8anos\source\repos\SchoolSystemKatrakis\School.Entities\bin\Debug\School.Entities.dll.config
+C:\Users\k.b.8anos\source\repos\SchoolSystemKatrakis\School.Entities\bin\Debug\School.Entities.dll
+C:\Users\k.b.8anos\source\repos\SchoolSystemKatrakis\School.Entities\bin\Debug\School.Entities.pdb
+C:\Users\k.b.8anos\source\repos\SchoolSystemKatrakis\School.Entities\bin\Debug\EntityFramework.dll
+C:\Users\k.b.8anos\source\repos\SchoolSystemKatrakis\School.Entities\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\k.b.8anos\source\repos\SchoolSystemKatrakis\School.Entities\bin\Debug\EntityFramework.xml
+C:\Users\k.b.8anos\source\repos\SchoolSystemKatrakis\School.Entities\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\k.b.8anos\source\repos\SchoolSystemKatrakis\School.Entities\obj\Debug\School.Entities.csproj.CoreCompileInputs.cache
+C:\Users\k.b.8anos\source\repos\SchoolSystemKatrakis\School.Entities\obj\Debug\School.Entities.csproj.CopyComplete
+C:\Users\k.b.8anos\source\repos\SchoolSystemKatrakis\School.Entities\obj\Debug\School.Entities.dll
+C:\Users\k.b.8anos\source\repos\SchoolSystemKatrakis\School.Entities\obj\Debug\School.Entities.pdb

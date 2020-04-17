@@ -1,0 +1,52 @@
+﻿@model PagedList.IPagedList<School.Entities.Student>
+@using PagedList;
+@using PagedList.Mvc;
+
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Students</h2>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, x => Url.Action("StudentTable", "Student", new { page = x, sortOrder = ViewBag.TitleShort, searchTitle = ViewBag.CurrentTitle }))
+
+@using (Html.BeginForm("StudentTable", "Student", FormMethod.Get))
+{
+    @Html.TextBox("searchlastname", null, new { placeholder = "Serch By Last Name" })
+    <input type="submit" value="search" />
+}
+
+<div>
+    Sort By:
+    @Html.ActionLink("FirstName", "StudentTable", "Student", new { sortOrder = ViewBag.FirstNameShort, searchlastname = ViewBag.CurrentLastName, searchfirstname = ViewBag.CurrentFirstName }, new { @class = "badge badge-primary" })
+    @Html.ActionLink("LastName", "StudentTable", "Student", new { sortOrder = ViewBag.FirstNameShort, searchlastname = ViewBag.CurrentLastName, searchfirstname = ViewBag.CurrentFirstName }, new { @class = "badge badge-primary" })
+    <br />
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>@Html.ActionLink("FirstName", "StudentTable", "Student", new { sortOrder = ViewBag.FirstNameShort, searchlastname = ViewBag.CurrentLastName, searchfirstname = ViewBag.CurrentFirstName }, null)</th>
+            <th>@Html.ActionLink("LastName", "StudentTable", "Student", new { sortOrder = ViewBag.FirstNameShort, searchlastname = ViewBag.CurrentLastName, searchfirstname = ViewBag.CurrentFirstName }, null)</th>
+            <th>Tuition Fees</th>
+            <th>Birth Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td><img width="110" class="img-fluid" src="@Html.DisplayFor(x=>student.PhotoUrl)" alt="Student Photo Missing" /></td>
+                <td>@Html.ActionLink(student.FirstName, "StudentDetails", "Student", new { id = @student.StudentId }, null)</td>
+                <td>@Html.DisplayFor(x => student.LastName)</td>
+                <td>@Html.DisplayFor(x => student.TuitionFees)</td>
+                <td>@Html.DisplayFor(x => student.BirthDate)</td>
+            </tr>
+        }
+    </tbody>
+</table>

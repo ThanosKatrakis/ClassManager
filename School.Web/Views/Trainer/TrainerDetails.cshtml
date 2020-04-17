@@ -1,0 +1,16 @@
+﻿@model School.Entities.Trainer
+
+@{
+    ViewBag.Title = "TrainerDetails";
+}
+
+<h2>Trainer Details</h2>
+
+<h3>@Model.FirstName @Model.LastName</h3>
+<img width="300" class="img-fluid" src="@Html.DisplayFor(x => Model.PhotoUrl)" alt="Photo Missing" />
+
+<ul>
+    <li>@Html.DisplayNameFor(x => Model.Subject) : @Html.DisplayFor(x => Model.Subject)</li>
+</ul>
+
+@Html.ActionLink("Back to trainer list", "TrainerTable", "Trainer")

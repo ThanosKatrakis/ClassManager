@@ -1,0 +1,19 @@
+﻿@model School.Entities.Assignment
+
+@{
+    ViewBag.Title = "AssignmentDetails";
+}
+
+<h2>Assignment Details</h2>
+
+<h3>@Model.Title </h3>
+
+<ul>
+    <li>@Html.DisplayNameFor(x => Model.Title) : @Html.DisplayFor(x => Model.Title)</li>
+    <li>@Html.DisplayNameFor(x => Model.Description) : @Html.DisplayFor(x => Model.Description)</li>
+    <li>@Html.DisplayNameFor(x => Model.SubmissionDate) : @Html.DisplayFor(x => Model.SubmissionDate)</li>
+    <li>@Html.DisplayNameFor(x => Model.OralMark) : @Html.DisplayFor(x => Model.OralMark)</li>
+    <li>@Html.DisplayNameFor(x => Model.TotalMark) : @Html.DisplayFor(x => Model.TotalMark)</li>
+</ul>
+
+@Html.ActionLink("Back to assignment list", "AssignmentTable", "Assignment")

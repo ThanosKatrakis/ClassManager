@@ -1,0 +1,49 @@
+﻿@model PagedList.IPagedList<School.Entities.Trainer>
+@using PagedList;
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+@{
+    ViewBag.Title = "Trainers Table";
+}
+
+<h2>All Trainers</h2>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, x => Url.Action("TrainerTable", "Trainer", new { page = x, sortOrder = ViewBag.TitleShort, searchTitle = ViewBag.CurrentTitle }))
+
+@using (Html.BeginForm("TrainerTable", "Trainer", FormMethod.Get))
+{
+    @Html.TextBox("searchlastname", null, new { placeholder = "Serch By Last Name" })
+    <input type="submit" value="search" />
+}
+
+<div>
+    Sort By:
+    @Html.ActionLink("FirstName", "TrainerTable", "Trainer", new { sortOrder = ViewBag.FirstNameShort, searchlastname = ViewBag.CurrentLastName, searchfirstname = ViewBag.CurrentFirstName }, new { @class = "badge badge-primary" })
+    @Html.ActionLink("LastName", "TrainerTable", "Trainer", new { sortOrder = ViewBag.FirstNameShort, searchlastname = ViewBag.CurrentLastName, searchfirstname = ViewBag.CurrentFirstName }, new { @class = "badge badge-primary" })
+    <br />
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>@Html.ActionLink("FirstName", "TrainerTable", "Trainer", new { sortOrder = ViewBag.FirstNameShort, searchlastname = ViewBag.CurrentLastName, searchfirstname = ViewBag.CurrentFirstName }, null)</th>
+            <th>@Html.ActionLink("LastName", "TrainerTable", "Trainer", new { sortOrder = ViewBag.FirstNameShort, searchlastname = ViewBag.CurrentLastName, searchfirstname = ViewBag.CurrentFirstName }, null)</th>
+            <th>Subject</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var trainer in Model)
+        {
+            <tr>
+                <td><img width="110" class="img-fluid" src="@Html.DisplayFor(x=>trainer.PhotoUrl)" alt="Trainer Photo Missing" /></td>
+                <td>@Html.ActionLink(trainer.FirstName, "TrainerDetails", "Trainer", new { id = trainer.TrainerId }, null)</td>
+                <td>@Html.DisplayFor(x => trainer.LastName)</td>
+                <td>@Html.DisplayFor(x => trainer.Subject)</td>
+            </tr>
+        }
+    </tbody>
+</table>

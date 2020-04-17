@@ -1,0 +1,17 @@
+﻿@model School.Entities.Student
+
+@{
+    ViewBag.Title = "StudentDetails";
+}
+
+<h2>Student Details</h2>
+
+<h3>@Model.FirstName @Model.LastName</h3>
+<img width="300" class="img-fluid"  src="@Html.DisplayFor(x => Model.PhotoUrl)" alt="Photo Missing" />
+
+<ul>
+    <li>@Html.DisplayNameFor(x => Model.TuitionFees) : @Html.DisplayFor(x => Model.TuitionFees)</li>
+    <li>@Html.DisplayNameFor(x => Model.BirthDate) : @Html.DisplayFor(x => Model.BirthDate)</li>
+</ul>
+
+@Html.ActionLink("Back to student list", "StudentTable", "Student")
